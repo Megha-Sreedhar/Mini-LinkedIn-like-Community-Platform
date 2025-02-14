@@ -42,3 +42,31 @@ export const createPost = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
+
+export const deletePost = async (req, res) => {
+	try {
+		const postId = req.params.id;
+		const userId = req.user._id;
+
+		const post = await Post.findById(postId);
+
+		if (!post) {
+			return res.status(404).json({ message: "Post not found" });
+		}
+
+		if (post.author.toString() !== userId.toString()) {
+			return res.status(403).json({ message: "You are not authorized to delete this post" });
+		}
+
+		if (post.image) {
+			await cloudinary.uploader.destroy(post.image.split("/").pop().split(".")[0]);
+		}
+
+		await Post.findByIdAndDelete(postId);
+
+		res.status(200).json({ message: "Post deleted successfully" });
+	} catch (error) {
+		console.log("Error in delete post controller", error.message);
+		res.status(500).json({ message: "Server error" });
+	}
+};
