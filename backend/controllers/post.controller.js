@@ -1,5 +1,7 @@
+import { sendCommentNotificationEmail } from "../emails/emailHandlers.js";
 import cloudinary from "../lib/cloudinary.js";
 import Post from "../models/post.model.js";
+import Notification from "../models/notification.model.js";
 
 export const getFeedPosts = async (req, res) => {
 	try {
@@ -85,3 +87,47 @@ export const getPostById = async (req, res) => {
 	}
 };
 
+export const createComment = async (req, res) => {
+	try {
+		const postId = req.params.id;
+		const { content } = req.body;
+
+		const post = await Post.findByIdAndUpdate(
+			postId,
+			{
+				$push: { comments: { user: req.user._id, content } },
+			},
+			{ new: true }
+		).populate("author", "name email username headline profilePicture");
+
+		if (post.author._id.toString() !== req.user._id.toString()) {
+			const newNotification = new Notification({
+				recipient: post.author,
+				type: "comment",
+				relatedUser: req.user._id,
+				relatedPost: postId,
+			});
+
+			await newNotification.save();
+
+			// send email
+            try {
+				const postUrl = process.env.CLIENT_URL + "/post/" + postId;
+				await sendCommentNotificationEmail(
+					post.author.email,
+					post.author.name,
+					req.user.name,
+					postUrl,
+					content
+				);
+			} catch (error) {
+				console.log("Error in sending comment notification email:", error);
+			}
+		}
+
+		res.status(200).json(post);
+	} catch (error) {
+		console.error("Error in createComment controller:", error);
+		res.status(500).json({ message: "Server error" });
+	}
+};
