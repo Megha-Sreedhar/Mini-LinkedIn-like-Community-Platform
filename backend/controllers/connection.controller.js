@@ -150,3 +150,18 @@ export const getUserConnections = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
+
+export const removeConnection = async (req, res) => {
+	try {
+		const myId = req.user._id;
+		const { userId } = req.params;
+
+		await User.findByIdAndUpdate(myId, { $pull: { connections: userId } });
+		await User.findByIdAndUpdate(userId, { $pull: { connections: myId } });
+
+		res.json({ message: "Connection removed successfully" });
+	} catch (error) {
+		console.error("Error in removeConnection controller:", error);
+		res.status(500).json({ message: "Server error" });
+	}
+};
