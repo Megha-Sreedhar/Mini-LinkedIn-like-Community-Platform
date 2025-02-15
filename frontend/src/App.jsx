@@ -24,6 +24,8 @@ export default function App() {
     }
   });
 
+  console.log("authUser", authUser);
+
   if (isLoading) return null;
 
   return (
