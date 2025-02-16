@@ -4,6 +4,8 @@ const AboutSection = ({ userData, isOwnProfile, onSave }) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const [about, setAbout] = useState(userData.about || "");
 
+	console.log(userData);
+
 	const handleSave = () => {
 		setIsEditing(false);
 		onSave({ about });
@@ -42,6 +44,7 @@ const AboutSection = ({ userData, isOwnProfile, onSave }) => {
 					)}
 				</>
 			)}
+			{!isOwnProfile && <p>{userData.about}</p>}
 		</div>
 	);
 };
