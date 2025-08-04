@@ -1,4 +1,4 @@
-<h1 align="center">Unlinked - Linkedin Clone ✨</h1>
+<h1 align="center">Mini LinkedIn-like Community Platform - Linkedin Clone ✨</h1>
 
 About This Site:
 
@@ -49,4 +49,4 @@ npm run start
 ```
 
 ### Live Link
-https://unlinked-siot.onrender.com/
+https://Mini LinkedIn-like Community Platform-siot.onrender.com/
