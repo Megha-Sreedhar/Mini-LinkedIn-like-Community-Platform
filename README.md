@@ -1,4 +1,4 @@
-<h1 align="center">Mini LinkedIn-like Community Platform - Linkedin Clone ✨</h1>
+<h1 align="center">Mini LinkedIn-like Community Platform</h1>
 
 About This Site:
 
