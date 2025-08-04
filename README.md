@@ -49,4 +49,4 @@ npm run start
 ```
 
 ### Live Link
-https://Mini LinkedIn-like Community Platform-siot.onrender.com/
+https://unlinked-siot.onrender.com/
