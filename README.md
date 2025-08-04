@@ -15,6 +15,15 @@ About This Site:
 -   👍 Like and Comment on Posts
 -   📰 News Feed 
 
+### Tech Stack Used:
+- **Frontend:** React.js, Tailwind CSS, DaisyUI
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB Atlas
+- **Authentication:** JWT (JSON Web Tokens)
+- **Image Hosting:** Cloudinary
+- **Email Service:** Mailtrap
+- **Hosting:** Render
+- 
 ### Setup .env file
 
 ```bash
