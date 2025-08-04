@@ -23,7 +23,7 @@ About This Site:
 - **Image Hosting:** Cloudinary
 - **Email Service:** Mailtrap
 - **Hosting:** Render
-- 
+
 ### Setup .env file
 
 ```bash
